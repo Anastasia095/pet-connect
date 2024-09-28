@@ -38,8 +38,22 @@ router.get('/test2', async (req, res) => {
         params: params,
         headers: headers
       });
-  
-      res.status(200).json(response.data);
+    //   console.log(response.data);
+
+      const serializedData = {
+        name: response.data.name,
+        animals: response.data.result.animals.map(animal => ({
+            breed: animal.breed, // Adjust based on the actual properties
+            location: animal.location,
+            name: animal.name
+            // Add other relevant properties as needed
+        })),
+     
+    };
+    console.log("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+ 
+    var result = serializedData.animals;
+    res.render('search', { result }); 
     } catch (error) {
       console.error('Error fetching data from Petfinder:', error.message);
       res.status(500).json({ error: 'Failed to fetch data from Petfinder.' });

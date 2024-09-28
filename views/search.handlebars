@@ -1,0 +1,19 @@
+{{#if result}}
+<ul>
+    {{#each result}}
+    <li>
+        <h3>Name: {{this.name}}</h3>
+        <p>Breed: {{this.breed}}</p>
+        <p>Location:</p>
+        <ul>
+            <li>Street: {{this.location.address.street}}</li>
+            <li>City: {{this.location.address.city}}</li>
+            <li>State: {{this.location.address.state}}</li>
+            <li>Open to Public: {{#if this.location.open_to_public}}Yes{{else}}No{{/if}}</li>
+        </ul>
+    </li>
+    {{/each}}
+</ul>
+{{else}}
+<p>No animals found.</p>
+{{/if}}
