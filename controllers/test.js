@@ -32,7 +32,7 @@ router.get('/test2', async (req, res) => {
       'User-Agent':
         'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.6 Safari/605.1.15'
     };
-  
+    console.log("Sending parameters to Petfinder API:", req.query);
     try {
       const response = await axios.get(url, {
         params: params,
