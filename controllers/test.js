@@ -8,12 +8,34 @@ router.get('/', (req, res) => {
 });
 
 router.get('/test2', async (req, res) => {
+    const tokenUrl = 'https://www.petfinder.com/user/me/';
+  
+    const tokenHeaders = {
+      Host: 'www.petfinder.com',
+      'X-Requested-With': 'XMLHttpRequest',
+      'User-Agent':
+        'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.6 Safari/605.1.15'
+    };
+    var token = "";
+    try {
+      const tokenResponse = await axios.get(tokenUrl, {
+        headers: tokenHeaders,
+      });
+      token = tokenResponse.data.token;
+      console.log(tokenResponse.data.token)
+    //   res.status(200).json(response.data);
+    } catch (error) {
+      console.error('Error fetching user data from Petfinder:', error.message);
+      res.status(500).json({ error: 'Failed to fetch user data from Petfinder.' });
+    }
+
+
     const url = 'https://www.petfinder.com/search/';
     const params = {
       page: 1,
       'limit[]': 40,
       status: 'adoptable',
-      token: 'RtS0E2HxvBT5IKfFXRKWPTI97g0cTNnw5EkZ2-cW3aU',
+      token: token,
       'distance[]': req.query.distance,
       'type[]': req.query.animal,
       'sort[]': 'nearest',
@@ -34,7 +56,7 @@ router.get('/test2', async (req, res) => {
         params: params,
         headers: headers
       });
-      console.log(response.data.result.animals[0]);
+    //   console.log(response.data.result.animals[0]);
 
       const serializedData = {
         name: response.data.name,
@@ -47,7 +69,7 @@ router.get('/test2', async (req, res) => {
         })),
      
     };
-    console.log("dddddddddddddddddddddddddd");
+    // console.log("dddddddddddddddddddddddddd");
  
     var result = serializedData.animals;
     console.log(result[0]);
