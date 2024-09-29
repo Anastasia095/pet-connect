@@ -38,11 +38,11 @@ router.get('/test2', async (req, res) => {
 
       const serializedData = {
         name: response.data.name,
-        animals: response.data.result.animals.map(animal => ({
-            breed: animal.breeds_label, 
-            location: animal.location,
-            name: animal.name,
-            photo_url: animal.primary_photo_url
+        animals: response.data.result.animals.map(item => ({
+            breed: item.animal.breeds_label, 
+            location: item.location,
+            name: item.animal.name,
+            photo_url: item.animal.primary_photo_url
             // Add other relevant properties as needed
         })),
      
@@ -50,7 +50,7 @@ router.get('/test2', async (req, res) => {
     console.log("dddddddddddddddddddddddddd");
  
     var result = serializedData.animals;
-    // console.log(result);
+    console.log(result[0]);
     res.render('search', { result }); 
     } catch (error) {
       console.error('Error fetching data from Petfinder:', error.message);
