@@ -50,9 +50,10 @@ router.get('/test2', async (req, res) => {
         })),
      
     };
-    console.log("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+    console.log("dddddddddddddddddddddddddd");
  
     var result = serializedData.animals;
+    console.log(result);
     res.render('search', { result }); 
     } catch (error) {
       console.error('Error fetching data from Petfinder:', error.message);

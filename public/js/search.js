@@ -12,5 +12,11 @@ function searchpet(query) {
     const response = fetch('/test/test2?token=RtS0E2HxvBT5IKfFXRKWPTI97g0cTNnw5EkZ2&distance=' + words[0] +'&animal=' + words[1] + '&breed=' +words[2]+ '&location='+words[3], {
         headers: { 'Content-Type': 'application/json' }
     });
+
+    if (response.ok) {
+        document.location.replace('/test/test2?token=RtS0E2HxvBT5IKfFXRKWPTI97g0cTNnw5EkZ2&distance=' + words[0] +'&animal=' + words[1] + '&breed=' +words[2]+ '&location='+words[3]);
+    } else {
+        alert("responsen not ok")
+    }
     // You can add an AJAX request or any other logic to handle the search
 }
