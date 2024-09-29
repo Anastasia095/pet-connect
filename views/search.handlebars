@@ -1,3 +1,4 @@
+{{!-- <h2>Animals Available for Adoption</h2>
 {{#if result}}
 <ul>
     {{#each result}}
@@ -16,4 +17,39 @@
 </ul>
 {{else}}
 <p>No animals found.</p>
+{{/if}} --}}
+
+
+<!-- views/search.handlebars -->
+<h2 class="my-4 text-center">Animals Available for Adoption</h2>
+
+{{#if result}}
+<div class="container">
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        {{#each result}}
+        <div class="col">
+            <div class="card h-100">
+                {{#if this.photo_url}}
+                <img src="{{this.photo_url}}" class="card-img-top" alt="{{this.name}}">
+                {{else}}
+                <img src="/images/placeholder.png" class="card-img-top" alt="No image available">
+                {{/if}}
+                <div class="card-body">
+                    <h5 class="card-title">{{this.name}}</h5>
+                    <p class="card-text"><strong>Breed:</strong> {{this.breed}}</p>
+                    <p class="card-text"><strong>Location:</strong> {{this.location.address.street}},
+                        {{this.location.address.city}}, {{this.location.address.state}}</p>
+                    <p class="card-text"><strong>Open to Public:</strong> {{#if
+                        this.location.open_to_public}}Yes{{else}}No{{/if}}</p>
+                </div>
+                <div class="card-footer text-center">
+                    <a href="{{this.url}}" class="btn btn-primary">View Details</a>
+                </div>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+</div>
+{{else}}
+<p class="text-center">No animals found.</p>
 {{/if}}
