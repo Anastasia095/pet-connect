@@ -13,16 +13,12 @@ router.get('/test2', async (req, res) => {
       page: 1,
       'limit[]': 40,
       status: 'adoptable',
-    //   edit token
       token: 'RtS0E2HxvBT5IKfFXRKWPTI97g0cTNnw5EkZ2-cW3aU',
-    //   edit distance
-      'distance[]': 100,
-    //   edit animal type
-      'type[]': 'dogs',
+      'distance[]': req.query.distance,
+      'type[]': req.query.animal,
       'sort[]': 'nearest',
-    //   edit breed and location
-      'breed[]': 'Golden Retriever',
-      'location_slug[]': 'us/fl/orlando',
+      'breed[]': req.query.breed,
+      'location_slug[]': req.query.location,
       include_transportable: true
     };
   
@@ -38,14 +34,15 @@ router.get('/test2', async (req, res) => {
         params: params,
         headers: headers
       });
-    //   console.log(response.data);
+      console.log(response.data.result.animals[0]);
 
       const serializedData = {
         name: response.data.name,
         animals: response.data.result.animals.map(animal => ({
-            breed: animal.breed, // Adjust based on the actual properties
+            breed: animal.breeds_label, 
             location: animal.location,
-            name: animal.name
+            name: animal.name,
+            photo_url: animal.primary_photo_url
             // Add other relevant properties as needed
         })),
      
@@ -53,7 +50,7 @@ router.get('/test2', async (req, res) => {
     console.log("dddddddddddddddddddddddddd");
  
     var result = serializedData.animals;
-    console.log(result);
+    // console.log(result);
     res.render('search', { result }); 
     } catch (error) {
       console.error('Error fetching data from Petfinder:', error.message);
