@@ -40,7 +40,7 @@ router.get('/test2', async (req, res) => {
       'type[]': req.query.animal,
       'sort[]': 'nearest',
       'breed[]': req.query.breed,
-      'location_slug[]': req.query.location,
+      'location_slug[]': req.query.country + '/' + req.query.state + '/' + req.query.city,
       include_transportable: true
     };
   
