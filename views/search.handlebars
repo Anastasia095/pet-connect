@@ -38,13 +38,16 @@
                 <div class="card-body">
                     <h5 class="card-title">{{this.name}}</h5>
                     <p class="card-text"><strong>Breed:</strong> {{this.breed}}</p>
-                    <p class="card-text"><strong>Location:</strong> {{this.location.address.street}},
-                        {{this.location.address.city}}, {{this.location.address.state}}</p>
-                    <p class="card-text"><strong>Open to Public:</strong> {{#if
-                        this.location.open_to_public}}Yes{{else}}No{{/if}}</p>
-                </div>
-                <div class="card-footer text-center">
-                    <a href="{{this.url}}" class="btn btn-primary">View Details</a>
+                    <p class="card-text"><strong>Location:</strong>
+                        {{this.location.address.city}}, {{this.location.address.state}},
+                        {{this.location.address.postal_code}}</p>
+                    <p class="card-text"><strong>Organization:</strong> {{this.organization}}</p>
+                    {{#if this.phone}}
+                    <p class="card-text"><strong>Phone:</strong> <a href="tel:{{this.phone}}">{{this.phone}}</a></p>
+                    {{/if}}
+                    {{#if this.email}}
+                    <p class="card-text"><strong>Email:</strong><a href="mailto:{{this.email}}">{{this.email}}</a> </p>
+                    {{/if}}
                 </div>
             </div>
         </div>

@@ -56,7 +56,7 @@ router.get('/test2', async (req, res) => {
         params: params,
         headers: headers
       });
-    //   console.log(response.data.result.animals[0]);
+      console.log(response.data.result.animals[0]);
 
       const serializedData = {
         name: response.data.name,
@@ -64,13 +64,15 @@ router.get('/test2', async (req, res) => {
             breed: item.animal.breeds_label, 
             location: item.location,
             name: item.animal.name,
-            photo_url: item.animal.primary_photo_url
-            // Add other relevant properties as needed
+            photo_url: item.animal.primary_photo_url,
+            organization: item.organization?.name || null,
+            phone: item.contact?.phone || null,
+            email: item.contact?.email || null
+
         })),
      
     };
-    // console.log("dddddddddddddddddddddddddd");
- 
+
     var result = serializedData.animals;
     console.log(result[0]);
     res.render('search', { result }); 
